@@ -34,3 +34,27 @@ printf("Data is %d\n", *num2_address);          // 초인터 변수에 저장된
  - 참조와 역참조의 차이
      - 참조: 변수를 직접 가져와서 사용하는 것이 아니라 그 변수의 위치를 가리킴
      - 역참조 : 저장되어 있는 주소에 가서 저장되어 있는 값에 접근
+
+
+## 포인터를 사용한 swap()
+
+```c
+void swap(int* num1, int* num2)
+{
+    int tmp;
+    
+    tmp = *num1;
+    *num1 = num2;
+    *num2 = tmp;
+}
+
+/* main */
+int num1 = 5;
+int num2 = 10;
+swap(&num1, &num2);
+```
+
+
+## 참조에 의한 전달 VS 값에 의한 전달
+ - 참조에 의한 전달 : 원본에 접근
+ - 갑에 의한 전달 : 원본을 복사
