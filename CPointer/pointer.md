@@ -18,7 +18,7 @@ int* num_address = &num         // 변수 num의 주소를 int형 포인터 변�
 ```
 
  - 읽는 방법 : 오른쪽에서 왼쪽으로
-> int* -> pointer to an int
+> int* -> pointer to an int  
 > char* > pointer to a char
 
 
