@@ -58,3 +58,58 @@ swap(&num1, &num2);
 ## 참조에 의한 전달 VS 값에 의한 전달
  - 참조에 의한 전달 : 원본에 접근
  - 갑에 의한 전달 : 원본을 복사
+
+
+## 포인터를 사용한 최소 & 최대 값 구하기
+```c
+// minmax.h 선언
+void get_min_max(const int nums[], const size_t nums_length, int* min, int* max);
+```
+
+```c
+// minmax.c 구현
+#include <assert.h>
+#include "minmax.h"
+
+void get_min_max(const int nums[], const size_t nums_length, int* min, int* max)
+{
+    assert(length >=1);
+    
+    *min = nums[0];
+    *max = nums[0];
+    
+    for(size_t i = 1; i < nums_length; ++i)
+    {
+        if(*min > nums[i])
+        {
+            *min = num[i];
+        }
+        
+        if(*max < nums[i])
+        {
+            *max = num[i];
+        }
+    }
+}
+```
+
+```c
+// main.c
+#include <stdio.h>
+#include "minmax.h"
+
+#define ARRAY_LENGTH (5)
+
+int main(void)
+{
+    int nums[ARRAY_LENGTH] = {1, 15, 3, 7, 9};
+    int min, max;
+    
+    get_min_max(nums, ARRAY_LENGTH, &min, &max);
+    
+    printf("min : %d\n", min);
+    printf("max : %d\n", max);
+
+    return 0;
+}
+```
