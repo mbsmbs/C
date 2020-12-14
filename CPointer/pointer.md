@@ -9,7 +9,7 @@
  -  이 때 그 주소로 부터 몇바이트를 읽어야 하는지를 하드웨어한테 알려줘야 함.  
  -  int, float, char등 데이터형을 명시해주면 그 크기만큼 읽어옴
 
-## 데이터형* 변수명 = &데이터; 
+ - 데이터형* 변수명 = &데이터; 
 
 
 ```c
@@ -17,15 +17,15 @@ int num = 5;                    // int형 변수를 선언하고 5로 초기화
 int* num_address = &num         // 변수 num의 주소를 int형 포인터 변수에 저장 데이터형의 크기만큼 읽어온다.
 ```
 
-## 읽는 방법 : 오른쪽에서 왼쪽으로
+ - 읽는 방법 : 오른쪽에서 왼쪽으로
 > int* -> pointer to an int
 > char* > pointer to a char
 
 
-## 역참조 연산자 '*': 포인터 변수에 저장되어 있는 주소의 값에 접근 
+ - 역참조 연산자 '*': 포인터 변수에 저장되어 있는 주소의 값에 접근 
 ```c
 int num2 = 10;                                  // int형 변수를 선언 & 초기화
 int* num2_address = &num2;                      // int형 포인터 변수에 num2의 주소를 저장
 printf("Address is %p\n", %num2_address);       // 포인터 변수에 저장된 주소 출력 -> Address is 0x7ffc877abbd8
-printf("Data is %d\n, *num2_address);            // 초인터 변수에 저장된 주소의 데이터를 출력 -> Data is 5
+printf("Data is %d\n", *num2_address);            // 초인터 변수에 저장된 주소의 데이터를 출력 -> Data is 5
 ```
