@@ -27,5 +27,5 @@ int* num_address = &num         // 변수 num의 주소를 int형 포인터 변�
 int num2 = 10;                                  // int형 변수를 선언 & 초기화
 int* num2_address = &num2;                      // int형 포인터 변수에 num2의 주소를 저장
 printf("Address is %p\n", %num2_address);       // 포인터 변수에 저장된 주소 출력 -> Address is 0x7ffc877abbd8
-printf("Data is %d\n", *num2_address);            // 초인터 변수에 저장된 주소의 데이터를 출력 -> Data is 5
+printf("Data is %d\n", *num2_address);          // 초인터 변수에 저장된 주소의 데이터를 출력 -> Data is 5
 ```
