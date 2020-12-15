@@ -123,7 +123,7 @@ int main(void)
 - 힙 메모리에 생성한 데이터
 
 ## NULL Pointer : 아무것도 안가리키는 포인터
-- 이렇게 사용
+- 사용법
 ```c
 #define NULL ((void*)0)    //NULL POINTER 매크로로 표현 
 ```
