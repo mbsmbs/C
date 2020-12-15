@@ -121,3 +121,9 @@ int main(void)
 ## 함수에서 포인터를 반환해도 되는 경우
 - 모든 전역변수 (파일, 함수)
 - 힙 메모리에 생성한 데이터
+
+## NULL Pointer : 아무것도 안가리키는 포인터
+- 이렇게 사용
+```c
+#define NULL ((void*)0)    //NULL POINTER 매크로로 표현 
+```
