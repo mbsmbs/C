@@ -219,3 +219,53 @@ if(ptr != NULL){...}       // 아닌지
    ```
    3. 둘다
    ```c const int* const ptr = &data;```
+
+  ## const 제거 하지 말자
+  
+  
+  ## 포인터의 용도:
+   1. 큰 데이터를 매개변수로
+   2. 반환값이 2이상일 때
+   3. 동적 메모리 할당
+   4. 자료구조 : 연결리스트, 트리등
+   
+   
+   ## 포인터 배열: 포인터를 담는 배열
+   ```c
+   int* ptr_array[5];
+   ```
+   
+   ### 함수에서 사용 예:
+   ```c
+   void print_Array(int* const data[], const size_t size, const size_t lengths[])
+   {
+       size_t i;
+       size_t j;
+       const int* p;
+       
+       for(i = 0; i < size; ++i)
+       {
+           p = data[i];
+           printf("nums[%d]:", i);
+           
+           for(j = 0; j< lengths[i]; ++j
+           {
+               printf(" %d", p[j]);
+           }
+           printf(\n);
+       }
+   }
+   ```
+   
+   ## 2차원 배열과 포인터 배열은 다르다
+   
+   
+   
+   # 정리:
+   1. 포인터
+   2. 주소 연산자, 역 참조 연산자
+   3. 널 포인터
+   4. 포인터와 두 가지 const
+   5. 포인터 산술 연산
+   6. 포인터와 배열
+   7. 포인터 배열
