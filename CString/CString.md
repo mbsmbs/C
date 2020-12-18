@@ -4,7 +4,7 @@
 
 ## char형 배열
 
-## C 문자열은 자동으로 '\0' 널 캐릭터로 끝을 표시한다.
+## C 문자열은 자동으로 '\0' 널 캐릭터로 끝을 표시한다. 즉 길이는 문자들의 길이 + 1
 
 ```c
 char str1[] = "abc";    // 스택에 저장
@@ -70,3 +70,47 @@ size_t get_str_length(const char* str)
     return count;
 }
 ```
+
+
+### 널문자가 없는 경우:
+```C
+char str[] = {'M', 'I', 'N'};
+```
+
+
+## 문자열 조작 manipulation
+## 두 문자열 비교 : 아스키 코드로 비교
+### 알고리듬
+1. 두 문자열에서 문자를 하나씩 읽음
+2. 두 문자를 비교:
+ - 왼쪽이 작으면 -1
+ - 오른쪽이 작으면 1
+ - 둘다 같고 널문자면 0
+3. 다음문자로
+
+```c
+int compare_string(const char* str0, const char* str1)
+{
+      while (*str0 != '\0' && *str0 == *str1)
+      {
+            ++str0;
+            ++str1;
+      }
+      
+      return *str0 - *str1;
+}
+```
+
+```c
+int compare_string(const char* str0, const char* str1)
+{
+      if(*str0 == *str1)
+      {
+            return 0;
+      }
+      
+      return *str0 > *str1 ? 1 : -1;
+}
+```
+
+
