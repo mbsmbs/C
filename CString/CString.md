@@ -104,6 +104,12 @@ int compare_string(const char* str0, const char* str1)
 ```c
 int compare_string(const char* str0, const char* str1)
 {
+      while (*str0 != '\0' && *str0 == *str1)
+      {
+            ++str0;
+            ++str1;
+      }
+
       if(*str0 == *str1)
       {
             return 0;
@@ -113,4 +119,148 @@ int compare_string(const char* str0, const char* str1)
 }
 ```
 
+### 더 효율적인 문자열 비교 : strcmp(), strncmp()
 
+
+### 대소문자 구분 없는 문자열 비교
+```c
+#include <ctype.h>
+
+int string_case_insensitive_compare(const char* str0, const char* str1)
+{
+      int c1;
+      int c2;
+      
+      c1 = tolower(*str0);
+      c2 = tolower(*str1);
+      
+      while(*str0 != '\0' && c1 == c2)
+      {
+            c1 = tolower(*++str0);
+            c2 = tolower(*++str1);
+      }
+      
+      if(c1 == c2)
+      {
+            return 0;
+      }
+      
+      return c1 > c2? 1: -1;
+}
+```
+
+## 문자열 복사
+```c
+void copy_String(char* dest, const char* src)
+{
+      while(*src != '\0')
+      {
+            *dest++ = *src++;
+      }
+      
+      *dest = '\0'
+}
+```
+
+### C 제공 함수 strcpy()
+```c
+char* strcpy(char* dest, const char* src);
+```
+- 이미 매개변수를 포인터로 받았고 그 안에 내용을 바꿨데 char*를 반환하는게 이상한 함수.
+- dest가 src보다 짧으면 소유하지 않는 메모리를 쓰게 되서 문제다. 덮어쓰기때문
+
+### 비교적 안전한 문자열 복사: strncpy() 
+```c
+char* strncpy(char* dest, const char* src, size_t count);
+```
+- 최대 count만큼 복사
+- 널 문자를 먼저 만나면 그전에 끝냄
+
+1. src가 count보다 짧거나 같으면
+- 남은걸 다 '\0'으로 채워준다
+
+2. src가 count보다 길다면 
+- count만큼 복사함
+- 널 문자를 붙일 곳이 없음
+- 따라서 안붙여줌
+
+####함수를 호출뒤 안정성을 위해 널문자를 추가해주는 경우도 많다.
+```c
+strcpy(dest, src, DEST_SIZE);
+dest[DEST_SIZE - 1] = '\0';
+```
+
+
+## 문자열 합치기
+### strcat()
+```c
+# include <string.h>
+
+char* strcat(char* dest, const char* src);
+```
+- dest에 널문자가 있는 곳부터 추가
+- dest의 길이가 문제 방지를 위해 충분해야함.
+
+### 보다 안전한 함수: strncat()
+```c
+char* strncat(char* dest, const char* src, size_t count);
+```
+- count만큼 dest뒤에 붙힌다.
+- count+1에 널문자 넣는다
+
+### 문자열 버퍼를 이용한 출력
+```c
+#include <stdio.h>
+#include <string.h>
+
+#include "buffered_print.h"
+
+#define BUFFER_LENGTH (32)
+
+static size_t_buffer_index = 0u;
+static char s_buffer[BUFFER_LENGTH];
+
+void buffer_print(const char* src)
+{
+      size_t num_left;
+      const char* p = src;
+      
+      num_left = strlen(src);
+      
+      while(num_left > 0)
+      {
+            size_t copy_count = BUFFER_LENGTH - 1 - s_buffer_index;
+            
+            const int buffer_empty = s_buffer_index == 0;
+            
+            if(num_left < copy_count)
+            {
+                  copy_count = num_left;
+            }
+            
+            s_buffer_index += copy_count;
+            num_left -= copy_count;
+            
+            if(buffer_empty)
+            {
+                  strncpy(s_buffer, p, copy_count);
+                  s_buffer[s_buffer_index] = '\0';
+            } 
+            else 
+            {
+                  strncat(s_buffer, p, copy_count);
+            }
+            
+            p+= copy_count;
+            
+            if(s_buffer_index == BUFFER_LENGTH -1)
+            {
+                  printf("%s\n", s_buffer);
+                  s_buffer_index = 0;
+            }
+      }
+}
+```
+
+
+## 문자열 찾기
