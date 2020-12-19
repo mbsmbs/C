@@ -264,3 +264,102 @@ void buffer_print(const char* src)
 
 
 ## 문자열 찾기
+### 없는 문자열 찾는 경우
+```c
+#include <string.h>
+
+int main(void)
+{
+      char msg[] = "I love string!, I love C! I love programming!";
+      
+      char* result = strstr(msg, "int");
+      printf("result: %s\n", result == NULL? "(null) : result");        // null pointer를 출력하지 않도록
+
+      return 0;
+}
+```
+
+```c
+char* strstr(const char* str, const char* substr);
+```
+- char*를 반환
+- substr이 있다면 substr의 시작 주소를 반환
+- substr이 없다면 NULL을 반환
+
+
+## 문자열 토큰화
+### strtok()
+```c
+#include <string.h>
+
+char msg[] = "Hi, there. Hello. Bye";
+const char delims[] = ",. ";                    //뭘로 구분할지 구분 문자를 넣어준다
+
+char* token =  strtok(msg, delims);
+while(tokeen != NULL)
+{
+      printf("%s\n", token);
+      token = strtok(NULL, delims);
+}
+```
+- 토큰화하는 문자열은 const가 아니기 때문에 원본이 바뀐다.
+- 함수 매개변수로 NULL이 들어오면 그전에 받았던 msg를 사용하는데 이 msg는 함수내 정적 변수에 저장된다.
+```c
+char* strtok(char* str, const char* delims);
+```
+
+
+## C문자열 함수들의 특징
+1. 꽤 많은 함수들이 문자열을 변경 안함. 그래서 const char*를 사용한다.
+2. 문자열을 변경하더라도 원본은 변경 안 하려 한다. 사본만 변경
+      - strtok() 예외
+      - 원본을 지키려면 호툴하는 함수에서 사본을 만든뒤 strtok()를 호출해야함.
+3. 절대 새로운 메모리를 만들어 주지 않는다.
+
+
+## 문자열 예
+```c
+int is_alpha(int c)
+{
+      return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+
+int to_upper(int c)
+{
+      if(is_alpha(c))
+      {
+            return c & ~0x20;
+      }
+      
+      return c;
+}
+
+int to_lower(int c)
+{
+      if(is_alpha(c))
+      {
+            return c | 0x20;
+      }
+      
+      return c;
+}
+
+void string_toupper(char* str)
+{
+      while(*str != '\0')
+      {
+            *str = to_upper(*str);
+            ++str;
+      }
+}
+
+void string_tolower(char* str)
+{
+      while(*str != '\0')
+      {
+            *str = to_lower(*str);
+            ++str;
+      }
+}
+```
