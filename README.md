@@ -5,4 +5,4 @@ C Programming Study
 
 # [String](https://github.com/mbsmbs/C/tree/main/CString)
 
-# [Output]()
+# [Output](https://github.com/mbsmbs/C/blob/main/output/output.md)
