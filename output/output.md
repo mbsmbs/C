@@ -65,7 +65,3 @@ void print_Ascii_table(void)
 }
 ```
 
-### 바이트 단위 변환 표
-```c
-
-```
