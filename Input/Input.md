@@ -153,7 +153,7 @@ char* fgets(char* str, int count, FILE* stream);
   4. 파일의 끝에 도달했음을 기록하는 EOF 지시자
   5. 플랫폼마다 이 자료형을 구현하는 방식이 다름
   6. 입력 및 출력 스트림은 오직 FILE 포인터로만 접근 및 조작 가능
-  7. 이름이 FILE이라 파일만 될 것 같지만 다른 스트림도 모두 표현 가능
+  7. 이름이 FILE이라 파일만 될 것 같지만 다른 스트림도 모두 표현 가능 (stdin, stdout, stderr)
   8. 나중에 실제 파일을 열어서 거기에 쓰거나 읽을 때도 이 자료형을 사용할 것임.
 - 반환 값:
   - 성공 : str
@@ -175,3 +175,153 @@ while (fgets(line, LINE_LENGTH, stdin) != NULL)
 - 그 전에 들어온 문자들은 지워지지 않음.
 - 언제나 배열의 크기는 충분히 크게 잡을 것
 - 버퍼 초기화 필요없음
+
+### 한 줄씩 읽는 방법이 유용한 경우
+- 단어 하나씩 읽는 것보다 더 빠름
+- cpu를 벗어나 외부 구성요소로부터 뭔가를 읽어올 때는 한 번에 많이 읽어오는게 빠름
+- 따라서 버퍼 크기는 충분이 큰게 좋다
+- 하지만 버퍼 오버플로 조심
+
+
+## 한 데이터씩 읽기
+
+### 3 가지 버전
+1. scanf() : 키보드(stdin)으로 부터 읽음
+```c
+int scanf(const char* format, ...);
+```
+2. fscnaf() : 파일 스트림으로 부터 읽음
+```c
+int fscanf(FILE* stream, const char* format, ...);
+```
+3. sscanf : C 스타일 문자열로부터 읽음.
+```c
+int sscanf(const char* buffer, const char* format, ...);
+```
+
+### printf 처럼 받아올 데이터 형을 지정할 수 있음.
+
+### 반환 값 : 
+- 몇 개의 데이터를 읽었는지 반환 (int)
+- 첫 데이터를 읽기 실패하면 EOF를 반환
+
+### [서식 문자열 형식](https://en.cppreference.com/w/c/io/fscanf)
+- % 뒤에 최대 4개의 지정자 : %(*) (너비) (길이 수정자) 서식 지정자
+
+### %s를 사용시 배열 크기보다 큰 무자열이 들어오면 버퍼 오버플로.
+
+### 정수 읽으려 했는데 문자가 있어서 읽기 실패하면 무한루프에 빠질 수 있다.
+```c
+int num;
+int sum = 0;
+
+while(TRUE)
+{
+  if(scanf("%d", &num) == 0)
+  {
+    printf("Error!\n");
+    continue;
+  }
+  
+  if(num == 0)
+  {
+    break;
+  }
+  
+  sum += num;
+}
+```
+
+### 해결법 fgets()와 sscanf()를 같이 써야 함.
+
+### 무한 루프 문제 없이 숫자 읽기 예
+```c
+#define LINE_LENGTH (1024)
+
+int sum = 0;
+int num;
+char line[LINE_LENGTH];
+
+while(TRUE)
+{
+  if(fgets(line, LINE_LENGTH, stdin) == NULL)
+  {
+    clearerr(stdin);
+    break;
+  }
+  
+  if(sscanf(line, "%d", &num) == 1)
+  {
+    sum += num;
+  }
+}
+
+// 출력코드
+```
+
+### 버퍼 오버플로 문제 없이 문자열 읽기
+```c
+#define LENGTH (4096)
+
+char line[LENGTH];
+char word[LENGTH];
+
+while(TRUE)
+{
+  if(fgets(line, LENGTH, stdin) == NULL
+  {
+    clearerr(stdin);
+    break;
+  }
+  
+  if(sscanf(line, "%s", word) == 1)
+  {
+    printf("%s\n", word);
+  }
+}
+```
+
+### clearerr() : 셋팅된 오류 표시자 제거
+```c
+void clearerr(FILE* stream);
+```
+
+### 한 데이터씩 읽는 방법이 유용한 경우
+- 텍스트를 다른 자료형으로 곧바로 읽어오는 가장 간단한 방법
+- 문자열로 들어올 경우 정수로 바꾸기 너무 힘든일
+- 사용자 입력 받을 때
+
+
+## 한 블럭씩 읽기
+
+### fread()
+```c
+size_t fread(void* buffer, size_t size, size_t count, FILE* stream);
+```
+- size바이트짜리 데이터를 총 count개수만큼 읽음
+- 그리고 buffer에 저장
+- EOF만나면 멈춤
+- 그러면 count보다 적은 수를 읽을 수도 있단 이야기
+- 그래서 실제로 읽은 개수를 반환
+- 참고로 읽는 게 있으면 당연히 쓰는 것도 있음
+```c
+size_t fwrite(const void* buffer, size_t size, size_t count, FILE* stream);
+```
+
+### 파일 스트림이 있다면 작동하는 코드
+```c
+int nums[64];
+size_t num_read;
+FILE* fstream;
+
+num_read = fread(nums, sizeof(num[0]), 64, fstream);
+fwrite(nums, sizeof(nums[0]), 64, fstream);
+```
+- int 블록을 저장 : sizeof(int) * 64
+
+### 한 블록씩 읽는 방법이 유용한 경우
+- 이진 데이터를 읽기 위해
+
+### 한 블록씩 읽을 때 주의할 점
+- 기본 데이터형의 크기는 시스템마다 다름
+- 정확히 파일에 저장할 데이터의 크기를 고정해 두는 게 좋음.
