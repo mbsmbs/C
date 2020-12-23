@@ -288,3 +288,43 @@ void copy_file(const char* src, const char* dst)
     }
 }
 ```
+
+## 파일 탐색
+
+### 파일 위치 표시자 : file position indicator
+- 스트림 안에서 현재 위치를 알려줌
+
+### 스트림의 3가지 표시자
+1. EOF 표시자      // clearerr() 지울 수 있음
+2. 오류 표시자     // clearerr() 지울 수 있음
+3. 파일 표시자
+
+### 스트림 위치를 시작으로 돌리기
+```c
+void rewind(FILE* stream);
+```
+
+### 파일 두번 읽기
+```c
+void print_array(const int* data, size_t n);
+```
+```c
+FILE* stream;
+int data[LENGTH];
+size_t num_read;
+
+/*오류 처리 생략*/
+stream = fopen(filename, "rb");
+num_read = fread(data, sizeof(data[0]), LENGTH, stream);
+print_array(data, num_read);
+
+rewind(stream);
+printf("**rewinded**\n");
+
+num_read = fread(data, sizeof(data[0]), LENGTH, stream);
+print_Array(data, num_read);
+
+fclose(stream);
+  
+}
+```
