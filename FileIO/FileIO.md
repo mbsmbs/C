@@ -54,7 +54,7 @@ FILE* fopen(const char* filename, const char* mode);
   - 유닉스 계열: r == rb
   - 윈도우 : 새 줄 문자 처리하는 것만 달라짐
 
-### 파일 쓰기
+## 파일 쓰기
 ```c
 size_t fwrite(const void* buffer, size_t size, size_t, count, FILE* stream);
 ```
@@ -81,7 +81,7 @@ void write_file(char* filename)
 }
 ```
 
-### 파일 읽기
+## 파일 읽기
 ```C
 #include <stdio.h>
 #include <string.h>
@@ -106,7 +106,7 @@ void read_file(const char* filename)
 }
 ```
 
-### 파일에 이어서 쓰기
+## 파일에 이어서 쓰기
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -127,7 +127,7 @@ void append_file(const char* filename)
 }
 ```
 
-### 제일 중요한거 : 파일 닫기!!
+## 제일 중요한거 : 파일 닫기!!
 - 내가 연파일 내가 닫아야 한다.
 - 파일은 운영체제가 열어주는데 우리가 언제 다 썼는지를 모른다
 - 자동으로 닫아주지 않는다.
