@@ -10,3 +10,5 @@ C Programming Study
 # [Input](https://github.com/mbsmbs/C/blob/main/Input/Input.md)
 
 # [File I/O](https://github.com/mbsmbs/C/blob/main/FileIO/FileIO.md)
+
+# [I/O redirection]()
