@@ -12,3 +12,5 @@ C Programming Study
 # [File I/O](https://github.com/mbsmbs/C/blob/main/FileIO/FileIO.md)
 
 # [I/O redirection](https://github.com/mbsmbs/C/blob/main/IORedirection/IORedirection.md)
+
+# [Structure]()
