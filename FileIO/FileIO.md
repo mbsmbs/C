@@ -288,6 +288,7 @@ void copy_file(const char* src, const char* dst)
     }
 }
 ```
+### 제대로된 파일 복사 : 강의 189
 
 ## 파일 탐색
 
