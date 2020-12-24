@@ -328,3 +328,149 @@ fclose(stream);
   
 }
 ```
+
+### 원하는 위치로 옮기기
+```c
+int fseek(FILE* stream, long offset, int origin);
+```
+- 파일 위치 표시자를 origin으로부터 offset만큼 이동함
+- origin 3가지 종류 (매크로):
+  - SEEK_SET : 파일의 시작
+  - SEEK_CUR : 현재 파일의 위치
+  - SEEK_END : 파일의 끝
+- 반환 값 :
+  - 성공 : 0
+  - 실패 : 0이 아닌 수
+  
+### 뒤로 이동하기
+```c
+void read_file(const char* filename)
+{
+  FILE* stream;
+  int data[LENGTH];
+  size_t num_read;
+  
+  /*오류 처리 생략*/
+  stream = fopen(filename, "rb"); // {20, 72, 99, 49, 63);
+  
+  fseek(stream, 1 * sizeof(data[0]), SEEK_SET);
+  
+  num_read = fread(data, sizeof(data[0], LENGTH, stream);
+  print_Array(stream);
+  
+  fclose(stream);
+}
+```
+
+### 앞으로 이동
+```c
+void read_file(const char* filename)
+{
+  FILE* stream;
+  int data[LENGTH];
+  size_t num_read;
+  
+  /*오류 처리 생략*/
+  stream = fopen(filename, "rb"); // {20, 72, 99, 49, 63);
+  
+  fseek(stream, 3 * sizeof(data[0]), SEEK_SET);   // 49
+  fseek(stream, -1, SEEK_SET);                    // 99
+  
+  num_read = fread(data, sizeof(data[0], LENGTH, stream);
+  print_Array(stream);
+  
+  fclose(stream);
+}
+```
+
+### 이동 실패
+```c
+void read_file(const char* filename)
+{
+  /*코드 생략*/
+  stream = fopen(filename, "rb"); // {20, 72, 99, 49, 63);
+  
+  result = fseek(stream - 1 * sizeof(data[0]), SEEK_CUR);
+  if(result != 0)
+  {
+    perror("error while seeking");
+    fclose(stream);
+    return;
+  }
+  /*코드 생략*/
+}
+```
+
+### 파일의 끝에서 앞으로 가는 건 되고 처음에서 앞으로는 당연히 안됨
+
+### 현재 위치를 알려면
+```c
+long ftell(FILE* stream);
+```
+- 현재 위치를 알려줌
+- 실패 : -1 반환
+- 바이너리 모드와 텍스트 모드에는 다르게 동작한다
+
+### 도돌이표
+```c
+void print_with_repeats(const char* filename)
+{
+  long pos = -1L;
+  int repeating = FALSE;
+  int c;
+  FILE* file;
+  
+  file = fopen(filename, "r");
+  if(file == NULL)
+  {
+    perror('error while opening);
+    return;
+  }
+  
+  c = fgetc(file);
+  while(c != EOF)
+  {
+    if(c != ':')
+    {
+      putchar(c);
+      goto next_char;
+    }
+    
+    if(!repeating)
+    {
+      if(pos < 0)
+      {
+        pos = ftell(file);
+        if(pos < 0)
+        {
+          perror("error while getting start position");
+          break;
+        }
+      }
+      else
+      {
+        repeating = TRUE;
+        
+        if(fseek(file, pos, SEEK_SET) != 0)
+        {
+          perror("error while fseek() to start position);
+          break;
+        }
+      }
+      
+      goto next_char;
+    }
+    
+    repeating = FALSE;
+    pos = -1;
+    
+neat_char:
+    c = fgetc(file);
+  }
+  
+  if(fclose(file) == EOF)
+  {
+     perror("error while closing");
+  }
+}
+```
