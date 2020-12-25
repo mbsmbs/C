@@ -15,4 +15,4 @@ C Programming Study
 
 # [Structure](https://github.com/mbsmbs/C/blob/main/Structure/Structure.md)
 
-# [Variable Argument](https://github.com/mbsmbs/C/blob/main/Structure/Structure.md)
+# [Variable Argument](https://github.com/mbsmbs/C/blob/main/VariableArgument/VariableArgument.md)
