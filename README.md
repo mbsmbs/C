@@ -13,4 +13,4 @@ C Programming Study
 
 # [I/O redirection](https://github.com/mbsmbs/C/blob/main/IORedirection/IORedirection.md)
 
-# [Structure]()
+# [Structure](https://github.com/mbsmbs/C/blob/main/Structure/Structure.md)
