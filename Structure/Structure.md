@@ -121,3 +121,20 @@ assert(sizeof(user_info_t) == 76);
 ```
 
 ### 점, 선 , 사각형 : 200
+
+
+## 비트 필드 : 사용할 데이터의 비트를 정하는것
+### 예 : 구조체와 비트 플래그
+```c
+typedef struct
+{
+  unsigned char b0 : 1;
+  unsigned char b1 : 1;
+  unsigned char b2 : 1;
+  unsigned char b3 : 1;
+  unsigned char b4 : 1;
+  unsigned char b5 : 1;
+  unsigned char b6 : 1;
+  unsigned char b7 : 1;
+} bitflags_t;
+```
