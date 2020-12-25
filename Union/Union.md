@@ -19,3 +19,4 @@ typedef union
   } bits;
 } bitflags_t;
 ```
+## 색상 표현하기 : 203
