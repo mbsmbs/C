@@ -17,4 +17,4 @@ C Programming Study
 
 # [Variable Argument](https://github.com/mbsmbs/C/blob/main/VariableArgument/VariableArgument.md)
 
-# [Error Handling]()
+# [Error Handling](https://github.com/mbsmbs/C/blob/main/ErrorHandling/ErrorHandling.md)
