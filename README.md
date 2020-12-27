@@ -21,4 +21,4 @@ C Programming Study
 
 # [Memory](https://github.com/mbsmbs/C/blob/main/Memory/Memory.md)
 
-# [Preprocessor]()
+# [Preprocessor](https://github.com/mbsmbs/C/blob/main/Preprocessor/Preprocessor.md)
