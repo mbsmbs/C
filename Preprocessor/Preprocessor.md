@@ -1,5 +1,5 @@
 # 전처리기
-- 다른 파일들 #include
+- 다른 파일들 #include <filename.h> or "filename.h"
 - 매크로를 다른 텍스트로 대체 #define, #undef...
 - 소스 파일의 일부를 조건부로 컴파일 #if, #ifdef, #ifndef, #else, #elif, #endif
 - 일부러 오류를 발생시킴 #error
