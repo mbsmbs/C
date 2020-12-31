@@ -1,6 +1,8 @@
 # C
 C Programming Study
 
+# [Basic Syntax]()
+
 # [Pointer](https://github.com/mbsmbs/C/blob/main/CPointer)
 
 # [String](https://github.com/mbsmbs/C/blob/main/CString/CString.md)
