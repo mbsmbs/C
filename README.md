@@ -3,6 +3,8 @@ C Programming Study
 
 # [Basic Syntax](https://github.com/mbsmbs/C/tree/main/BasicSyntax)
 
+# [Build Process]()
+
 # [Pointer](https://github.com/mbsmbs/C/blob/main/CPointer)
 
 # [String](https://github.com/mbsmbs/C/blob/main/CString/CString.md)
