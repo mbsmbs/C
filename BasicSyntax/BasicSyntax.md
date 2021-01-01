@@ -158,3 +158,29 @@ label_name:
 ```c
 int grades[3] = {1, 2, 3};
 ```
+- 배열의 요소 개수 구하는 방법
+```c
+const size_t num_vals = sizeof(values) / sizeof(values[0]);
+/* or */
+#define ARRAY_LENGTH(arr) (sizeof(arr) / sizeof(arr[0]))
+
+const size_t num_vals2 = ARRAY_LENGTH(values);
+```
+- C는 배열 요소의 값을 초기화해주지 않음
+- 소유하지 않은 메모리에 값을 넣어줄 수 있으니 조심하자
+
+### 다차원 배열
+```c
+int buffer[3][3];     /* 2 차원 */
+
+int buffer[3][3][3];  /* 3 차원 */
+```
+
+## 스택 메모리
+- 각 함수에서 사용하는 지역 변수 등을 임시적으로 저장하는 공간
+- 스택 메모리의 크기는 프로그램 빌드 시에 결정됨
+- 스택 메모리의 위치는 실행 시에 결정됨
+- 너무 큰 데이터는 못 넣는다
+
+### 스택 프레임 : 각 함수가 사용하는 스택 메모리의 범위
+
