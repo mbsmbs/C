@@ -155,3 +155,6 @@ label_name:
 
 
 ## 배열
+```c
+int grades[3] = {1, 2, 3};
+```
