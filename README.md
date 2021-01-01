@@ -1,7 +1,7 @@
 # C
 C Programming Study
 
-# [Basic Syntax]()
+# [Basic Syntax](https://github.com/mbsmbs/C/tree/main/BasicSyntax)
 
 # [Pointer](https://github.com/mbsmbs/C/blob/main/CPointer)
 
