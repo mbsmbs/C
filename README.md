@@ -3,7 +3,7 @@ C Programming Study
 
 # [Basic Syntax](https://github.com/mbsmbs/C/tree/main/BasicSyntax)
 
-# [Build Process]()
+# [Build Process](https://github.com/mbsmbs/C/blob/main/BuildProcess/BuildProcess.md)
 
 # [Pointer](https://github.com/mbsmbs/C/blob/main/CPointer)
 
