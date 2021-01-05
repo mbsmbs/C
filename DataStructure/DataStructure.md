@@ -196,7 +196,7 @@ int dequeue(void)                       // 큐에서 요소 삭제 함수
 ### 연결 리스트의 검색 O(n)
 - 첫 노드부터 찾을 때까지
 
-### 연결 리스트 전체를 출력하는 코드
+### 연결 리스트 전체를 출력 코드
 ```c
 typedef struct node
 {
@@ -240,7 +240,7 @@ destroy(head);                  // head메모리 해제
 head = NULL;                    // 안전하게 head에 NULL대입
 ```
 
-### 연결리스트 삽입
+### 연결리스트 삽입 코드
 ```c
 void insert_front(node** phead, int n)    // (head 포인터를 가리키는 phead, 요소 n)을 받고 맨 앞에 삽입하는 함수
 {
