@@ -216,3 +216,52 @@ void print_node(const node_t* head)
   }
 }
 ```
+
+### 연결리스트 해제 코드
+```c
+void destroy(node_t head)       // 연결리스트 해제 코드 
+{
+  node_t* p = head;             // head대체
+  
+  while(p != NULL)              // p가 NULL이 아닐때까지
+  {
+    node_t* next = p->next;     // 다음 노드를 가리키고
+    free(p);                    // 지금 노드의 메모리를 해제하고
+    p = next;                   // p 이동
+  }
+}
+
+/* main */
+node_t* head = NULL;            // head 노드 선언 & 초기화
+
+/*codes...*/
+
+destroy(head);                  // head메모리 해제
+head = NULL;                    // 안전하게 head에 NULL대입
+```
+
+### 연결리스트 삽입
+```c
+void insert_front(node** phead, int n)    // (head 포인터를 가리키는 phead, 요소 n)을 받고 맨 앞에 삽입하는 함수
+{
+  node_t* new_node;                       // 새노드를 동적할당할 노드 준비
+  
+  new_node = malloc(sizeof(node_t));      // 새노드를 동적 할당
+  new_node->value = n;                    // 새노드의 데이터 삽입
+  
+  new_node->next = *phead;                // head가 원래 가리키던걸 새노드가 가리키게 한다
+  *phead = new_node;                      // phead는 새로운 head를 가리키게 한다
+}
+
+/* main */
+
+node_t* head = NULL;
+
+insert_front(&head, 3);
+insert_front(&head, 5);
+insert_front(&head, 2);
+insert_front(&head, 0);
+
+destroy(head);
+head = NULL;
+```
