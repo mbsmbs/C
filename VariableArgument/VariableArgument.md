@@ -1,4 +1,24 @@
 # 가변 인자 함수
+```c
+#include <stdarg.h>                   // va_list, va_start, va_arg, va_end가 정의된 헤더 파일
+
+void printNumbers(int args, ...)      // 가변 인자의 개수를 받음, ...로 가변 인자 설정
+{
+    va_list ap;                       // 가변 인자 목록 포인터
+
+    va_start(ap, args);               // 가변 인자 목록 포인터 설정
+    for (int i = 0; i < args; i++)    // 가변 인자 개수만큼 반복
+    {
+        int num = va_arg(ap, int);    // int 크기만큼 가변 인자 목록 포인터에서 값을 가져옴
+                                      // ap를 int 크기만큼 순방향으로 이동
+        printf("%d ", num);           // 가변 인자 값 출력
+    }
+    va_end(ap);                       // 가변 인자 목록 포인터를 NULL로 초기화
+
+    printf("\n");                     // 줄바꿈
+}
+
+```
 
 ## 반환형 함수명 (자료형이 정해진 매개변수 목록, ...);
 - 정해지지 않은 수의 매개변수를 허용한다
